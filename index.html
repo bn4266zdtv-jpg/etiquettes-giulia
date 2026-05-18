@@ -94,7 +94,7 @@ body{max-width:1200px;margin:0 auto}
 .fab{bottom:20px;right:20px}
 .modal{max-width:480px;margin:auto;border-radius:20px}
 .modal-overlay{align-items:center}
-.page-a4{transform:scale(0.55);transform-origin:top left;margin-bottom:-200px}
+.page-a4{transform:scale(0.52);transform-origin:top left;margin-bottom:-230px}
 }
 @media print{
 @page{size:A4 portrait;margin:0}
@@ -132,15 +132,14 @@ body,html{background:none}
   </div>
   <div class="style-card">
     <h3>🎨 Couleurs par catégorie</h3>
-    <p style="font-size:12px;color:#999;margin-bottom:14px">Appliquées automatiquement sur les bandeaux selon la catégorie.</p>
+    <p style="font-size:12px;color:#999;margin-bottom:14px">Appliquées automatiquement sur les bandeaux et le prix.</p>
     <div id="cat-palette"></div>
   </div>
   <div class="style-card">
     <h3>🖌️ Couleurs communes</h3>
     <div class="color-grid">
       <div class="color-item"><label>Fond étiquette</label><input type="color" id="c_bg" value="#FAF6EE" oninput="updateColors()"></div>
-      <div class="color-item"><label>Texte prix</label><input type="color" id="c_prix" value="#C4883A" oninput="updateColors()"></div>
-      <div class="color-item"><label>Texte nom</label><input type="color" id="c_nom" value="#3D2010" oninput="updateColors()"></div>
+      <div class="color-item"><label>Texte nom</label><input type="color" id="c_nom" value="#1C1712" oninput="updateColors()"></div>
       <div class="color-item"><label>Filet central</label><input type="color" id="c_filet" value="#C4883A" oninput="updateColors()"></div>
     </div>
   </div>
@@ -176,21 +175,28 @@ body,html{background:none}
 
 <script>
 const CAT_COLORS={
-  'Pains':        {top:'#5C3317',bot:'#7A4520',label:'🍞 Pains',     desc:'Brun terre'},
-  'Viennoiseries':{top:'#B8762A',bot:'#C4883A',label:'🥐 Viennoiseries',desc:'Ocre beurré'},
-  'Pâtisseries':  {top:'#8B2635',bot:'#A83245',label:'🍰 Pâtisseries',desc:'Bordeaux'},
-  'Snacking':     {top:'#5C6E2E',bot:'#728A38',label:'🥪 Snacking',   desc:'Vert olive'},
-  'Boissons':     {top:'#4A2C2A',bot:'#6B3F3C',label:'☕ Boissons',   desc:'Brun café'},
-  'Autres':       {top:'#4A4A4A',bot:'#666666',label:'🏷️ Autres',    desc:'Ardoise'},
+  'Pains':        {top:'#5C3317',bot:'#7A4520',label:'🍞 Pains',        desc:'Brun terre'},
+  'Viennoiseries':{top:'#B8762A',bot:'#C4883A',label:'🥐 Viennoiseries', desc:'Ocre beurré'},
+  'Pâtisseries':  {top:'#8B2635',bot:'#A83245',label:'🍰 Pâtisseries',   desc:'Bordeaux'},
+  'Snacking':     {top:'#5C6E2E',bot:'#728A38',label:'🥪 Snacking',      desc:'Vert olive'},
+  'Boissons':     {top:'#4A2C2A',bot:'#6B3F3C',label:'☕ Boissons',      desc:'Brun café'},
+  'Autres':       {top:'#4A4A4A',bot:'#666666',label:'🏷️ Autres',       desc:'Ardoise'},
 };
 const CATS=Object.keys(CAT_COLORS);
-const SIZES={xs:{label:'XS — 5×3 cm',w:50,h:30},sm:{label:'S — 6×4 cm',w:60,h:40},md:{label:'M — 9×5 cm',w:90,h:50},lg:{label:'L — 12×6 cm',w:120,h:60},xl:{label:'XL — 15×8 cm',w:150,h:80}};
+const SIZES={
+  xs: {label:'XS — 5×3 cm',  w:50, h:30},
+  sm: {label:'S — 6×4 cm',   w:60, h:40},
+  md: {label:'M — 9×5 cm',   w:90, h:50},
+  lg: {label:'L — 12×6 cm',  w:120,h:60},
+  xl: {label:'XL — 15×8 cm', w:150,h:80},
+  xxl:{label:'XXL — 18×8 cm',w:180,h:80},
+};
 const ALLERGENS=[{k:'gluten',l:'Gluten'},{k:'crustaces',l:'Crustacés'},{k:'oeufs',l:'Œufs'},{k:'poisson',l:'Poisson'},{k:'arachides',l:'Arachides'},{k:'soja',l:'Soja'},{k:'lait',l:'Lait'},{k:'fruits_coque',l:'Fruits à coque'},{k:'celeri',l:'Céleri'},{k:'moutarde',l:'Moutarde'},{k:'sesame',l:'Sésame'},{k:'so2',l:'SO₂/Sulfites'},{k:'lupin',l:'Lupin'},{k:'mollusques',l:'Mollusques'}];
 const BADGES=[{k:'',l:'Aucun',bg:'#ddd',fg:'#666'},{k:'nouveau',l:'Nouveauté',bg:'#2471a3',fg:'#fff'},{k:'coeur',l:'Coup de cœur',bg:'#922b21',fg:'#fff'},{k:'jour',l:'Spécial du jour',bg:'#1e8449',fg:'#fff'},{k:'promo',l:'Promo',bg:'#d35400',fg:'#fff'},{k:'bio',l:'Bio',bg:'#27ae60',fg:'#fff'},{k:'best',l:'Best-seller',bg:'#7d3c98',fg:'#fff'}];
 
 let sn=localStorage.getItem('eq_sn')||'Les Petits Pains de Giulia';
 let logoB64=localStorage.getItem('eq_logo')||'';
-let colors=JSON.parse(localStorage.getItem('eq_colors')||'null')||{bg:'#FAF6EE',prix:'#C4883A',nom:'#3D2010',filet:'#C4883A'};
+let colors=JSON.parse(localStorage.getItem('eq_colors')||'null')||{bg:'#FAF6EE',nom:'#1C1712',filet:'#C4883A'};
 let cutLines=localStorage.getItem('eq_cut')==='1';
 let ps=JSON.parse(localStorage.getItem('eq_ps')||'null')||[
   {id:1,n:'Brownie',s:'Chocolat & Framboise',p:'2,80',u:'la pièce',e:'🍫',sz:'sm',cat:'Pâtisseries',badge:'',v:true,alg:[],show_alg:false,poids:'',poids_u:'g',show_poids:false},
@@ -205,15 +211,33 @@ let nid=Math.max(...ps.map(p=>p.id),0)+1;
 let editingId=null;
 
 function catColor(cat){return CAT_COLORS[cat]||CAT_COLORS['Autres']}
-function calcFS(sz){const h=SIZES[sz]?SIZES[sz].h:40;const topH=h*0.15,botH=h*0.05,inner=h-topH-botH,mm2pt=2.83;return{topH,botH,shop:Math.max(3.5,h*0.09),emoji:inner*mm2pt*0.18,nom:inner*mm2pt*0.22,sous:inner*mm2pt*0.12,prix:inner*mm2pt*0.26,unite:inner*mm2pt*0.09,poids:inner*mm2pt*0.08,alg:inner*mm2pt*0.075,gap:inner*0.015}}
+
+function calcFS(sz,n){
+  const h=SIZES[sz]?SIZES[sz].h:40;
+  const topH=h*0.14,botH=h*0.04,inner=h-topH-botH,mm2pt=2.83;
+  const many=(n>=6);
+  return{
+    topH,botH,
+    shop: Math.max(4.5,Math.min(h*0.10,7.5)),
+    emoji:Math.max(6,  inner*mm2pt*(many?0.12:0.16)),
+    nom:  Math.max(7,  inner*mm2pt*(many?0.17:0.21)),
+    sous: Math.max(4.5,inner*mm2pt*(many?0.09:0.11)),
+    prix: Math.max(9,  inner*mm2pt*(many?0.20:0.25)),
+    unite:Math.max(3.5,inner*mm2pt*(many?0.07:0.08)),
+    poids:Math.max(3.5,inner*mm2pt*(many?0.065:0.075)),
+    alg:  Math.max(3,  inner*mm2pt*(many?0.060:0.070)),
+    gap:  Math.max(0.08,inner*(many?0.004:0.010)),
+  };
+}
+
 function sv(){localStorage.setItem('eq_ps',JSON.stringify(ps));localStorage.setItem('eq_sn',sn);localStorage.setItem('eq_colors',JSON.stringify(colors));localStorage.setItem('eq_cut',cutLines?'1':'0')}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)'},2200)}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function calcPrixKg(p){const prix=parseFloat(String(p.p||'').replace(',','.'));const poids=parseFloat(String(p.poids||'').replace(',','.'));if(!prix||!poids||isNaN(prix)||isNaN(poids))return null;return(prix/(p.poids_u==='g'?poids/1000:poids)).toFixed(2).replace('.',',')}
 function showTab(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');document.getElementById('tab-'+id).classList.add('active');if(id==='apercu')rp();if(id==='style')renderCatPalette()}
 function updateSN(v){sn=v;document.getElementById('snd').textContent=v;sv()}
-function updateColors(){colors.bg=document.getElementById('c_bg').value;colors.prix=document.getElementById('c_prix').value;colors.nom=document.getElementById('c_nom').value;colors.filet=document.getElementById('c_filet').value;sv()}
-function applyColorInputs(){document.getElementById('c_bg').value=colors.bg;document.getElementById('c_prix').value=colors.prix;document.getElementById('c_nom').value=colors.nom;document.getElementById('c_filet').value=colors.filet}
+function updateColors(){colors.bg=document.getElementById('c_bg').value;colors.nom=document.getElementById('c_nom').value;colors.filet=document.getElementById('c_filet').value;sv()}
+function applyColorInputs(){document.getElementById('c_bg').value=colors.bg;document.getElementById('c_nom').value=colors.nom;document.getElementById('c_filet').value=colors.filet}
 function renderCatPalette(){document.getElementById('cat-palette').innerHTML=Object.entries(CAT_COLORS).map(([cat,c])=>`<div class="cat-pal-row"><div class="cat-pal-swatch" style="background:linear-gradient(135deg,${c.top},${c.bot})"></div><div class="cat-pal-info"><div class="cat-pal-name">${c.label}</div><div class="cat-pal-code">${c.desc} — ${c.top}</div></div></div>`).join('')}
 function loadLogo(e){const f=e.target.files[0];if(!f)return;if(f.size>600000){toast('❌ Image trop lourde');return;}const r=new FileReader();r.onload=ev=>{logoB64=ev.target.result;try{localStorage.setItem('eq_logo',logoB64)}catch(ex){}updateLogoDisplay();toast('✅ Logo chargé !')};r.readAsDataURL(f);e.target.value=''}
 function removeLogo(){logoB64='';localStorage.removeItem('eq_logo');updateLogoDisplay();toast('Logo supprimé')}
@@ -224,6 +248,7 @@ function dupP(id){const src=ps.find(p=>p.id===id);if(!src)return;const clone={..
 function delP(id){if(!confirm('Supprimer ?'))return;ps=ps.filter(p=>p.id!==id);sv();renderProdList();toast('Supprimé')}
 function exportData(){const b=new Blob([JSON.stringify({sn,colors,ps},null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='etiquettes.json';a.click();URL.revokeObjectURL(u);toast('✅ Exporté!')}
 function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.ps&&Array.isArray(d.ps)){ps=d.ps;nid=Math.max(...ps.map(p=>p.id),0)+1;if(d.sn){sn=d.sn;document.getElementById('sni').value=sn;document.getElementById('snd').textContent=sn}if(d.colors){colors=d.colors;applyColorInputs()}sv();renderProdList();toast('✅ '+ps.length+' produits!')}}catch{toast('❌ Erreur')}};r.readAsText(f);e.target.value=''}
+
 function openModal(id){
   editingId=id||null;
   const p=id?ps.find(x=>x.id===id):{n:'',s:'',p:'',u:'la pièce',e:'',sz:'sm',cat:'Pâtisseries',badge:'',v:true,alg:[],show_alg:false,poids:'',poids_u:'g',show_poids:false};
@@ -247,7 +272,7 @@ function openModal(id){
       <div class="field"><label>📐 Taille</label><select id="m_sz">${sizeOpts}</select></div>
       <div class="field"><label>📂 Catégorie</label><select id="m_cat" onchange="updateCatPreview(this.value)">${catOpts}</select></div>
     </div>
-    <div id="cat-prev" style="border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;color:#fff;margin-bottom:14px;text-align:center;transition:background .2s"></div>
+    <div id="cat-prev" style="border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;color:#fff;margin-bottom:14px;text-align:center"></div>
     <div class="section-title">⚖️ Poids & Prix au kilo</div>
     <div class="field-row3">
       <div class="field"><label>Poids</label><input type="text" id="m_poids" value="${esc(p.poids)}" placeholder="150" oninput="updateModalKg()"></div>
@@ -267,12 +292,13 @@ function openModal(id){
   document.getElementById('modal-overlay').classList.add('open');
   setTimeout(()=>{try{document.getElementById('m_n').focus()}catch(e){}},100);
 }
-function updateCatPreview(cat){const c=catColor(cat);const el=document.getElementById('cat-prev');if(el){el.style.background=`linear-gradient(90deg,${c.top},${c.bot})`;el.textContent=c.label+' — couleur du bandeau'}}
+function updateCatPreview(cat){const c=catColor(cat);const el=document.getElementById('cat-prev');if(el){el.style.background=`linear-gradient(90deg,${c.top},${c.bot})`;el.textContent=c.label+' — couleur du bandeau et du prix'}}
 function selectBadge(btn){document.querySelectorAll('.badge-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
 function updateModalKg(){const prix=parseFloat(String((document.getElementById('m_p')||{}).value||'').replace(',','.'));const poids=parseFloat(String((document.getElementById('m_poids')||{}).value||'').replace(',','.'));const u=(document.getElementById('m_poids_u')||{}).value||'g';const el=document.getElementById('m_pkg');if(!el)return;if(!prix||!poids||isNaN(prix)||isNaN(poids)){el.value='—';return;}el.value=(prix/(u==='g'?poids/1000:poids)).toFixed(2).replace('.',',')+' €/kg'}
 function saveModal(){const n=(document.getElementById('m_n').value||'').trim();if(!n){alert('Le nom est obligatoire');return;}const alg=Array.from(document.querySelectorAll('input[name=alg]:checked')).map(x=>x.value);const ab=document.querySelector('.badge-opt.active');const badge=ab?ab.dataset.badge||'':'';const data={n,s:document.getElementById('m_s').value,p:document.getElementById('m_p').value,u:document.getElementById('m_u').value,e:document.getElementById('m_e').value,sz:document.getElementById('m_sz').value,cat:document.getElementById('m_cat').value,badge,v:document.getElementById('m_v').checked,poids:document.getElementById('m_poids').value,poids_u:document.getElementById('m_poids_u').value,show_poids:document.getElementById('m_show_poids').checked,alg,show_alg:document.getElementById('m_show_alg').checked};if(editingId){const p=ps.find(p=>p.id===editingId);if(p)Object.assign(p,data);}else{ps.push({id:nid++,...data});}sv();closeModal();renderProdList();toast(editingId?'✅ Modifié !':'✅ Ajouté !')}
 function closeModal(){document.getElementById('modal-overlay').classList.remove('open');editingId=null}
 function handleOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal()}
+
 function renderProdList(){
   const container=document.getElementById('prod-list-container');container.innerHTML='';
   if(ps.length===0){container.innerHTML='<p style="text-align:center;color:#aaa;padding:40px 20px;font-size:15px">Aucun produit.<br>Appuie sur + pour en ajouter !</p>';return;}
@@ -295,39 +321,53 @@ function renderProdList(){
     sec.appendChild(list);container.appendChild(sec);
   });
 }
+
 function rp(){
   const pg=document.getElementById('pa');pg.innerHTML='';
   pg.classList.toggle('cut-lines',cutLines);
   ps.filter(p=>p.v).forEach(p=>{
-    const sz=SIZES[p.sz]||SIZES['sm'];const w=sz.w,h=sz.h;
-    const cc=catColor(p.cat);const F=calcFS(p.sz);
+    const sz=SIZES[p.sz]||SIZES['sm'];
+    const w=sz.w,h=sz.h;
+    const cc=catColor(p.cat);
+    let ni=1;if(p.e)ni++;if(p.s)ni++;ni++;if(p.u)ni++;if(p.show_poids&&p.poids)ni++;if(p.show_alg&&p.alg&&p.alg.length>0)ni++;
+    const F=calcFS(p.sz,ni);
     const algNames=(p.alg||[]).map(k=>{const a=ALLERGENS.find(x=>x.k===k);return a?a.l:k}).join(', ');
     const pkgVal=calcPrixKg(p);
     const poidsStr=p.show_poids&&p.poids?`${p.poids} ${p.poids_u}${pkgVal?' · '+pkgVal+' €/kg':''}`:null;
-    const topContent=logoB64?`<img src="${logoB64}" style="max-height:${F.topH*0.72}mm;max-width:${w*0.82}mm;object-fit:contain;" alt="logo">`:`<span style="font-family:'Cormorant Garamond',serif;font-size:${F.shop}pt;letter-spacing:.15em;color:rgba(255,255,255,.85);text-transform:uppercase;white-space:nowrap;overflow:hidden;">${esc(sn)}</span>`;
+
+    // Nom boutique toujours en blanc gras dans le bandeau
+    const topContent=logoB64
+      ?`<img src="${logoB64}" style="max-height:${F.topH*0.72}mm;max-width:${w*0.82}mm;object-fit:contain;" alt="logo">`
+      :`<span style="font-family:'DM Sans',sans-serif;font-size:${F.shop}pt;font-weight:600;letter-spacing:.12em;color:#fff;text-transform:uppercase;white-space:nowrap;overflow:hidden;">${esc(sn)}</span>`;
+
     let ribbonHtml='';
-    if(p.badge){const bd=BADGES.find(b=>b.k===p.badge);if(bd){const rS=Math.max(12,w*0.40);const fsr=Math.max(3.5,h*0.085);ribbonHtml=`<div style="position:absolute;top:0;right:0;width:${rS}mm;height:${rS}mm;overflow:hidden;z-index:3;pointer-events:none;"><div style="position:absolute;top:${rS*0.28}mm;right:-${rS*0.28}mm;width:${rS*1.4}mm;background:${bd.bg};color:${bd.fg};font-family:'DM Sans',sans-serif;font-size:${fsr}pt;font-weight:700;text-align:center;padding:${rS*0.06}mm 0;transform:rotate(45deg);transform-origin:center;white-space:nowrap;">${bd.l}</div></div>`;}}
+    if(p.badge){const bd=BADGES.find(b=>b.k===p.badge);if(bd){const rS=Math.max(12,w*0.38);const fsr=Math.max(3.5,h*0.085);ribbonHtml=`<div style="position:absolute;top:0;right:0;width:${rS}mm;height:${rS}mm;overflow:hidden;z-index:3;pointer-events:none;"><div style="position:absolute;top:${rS*0.28}mm;right:-${rS*0.28}mm;width:${rS*1.4}mm;background:${bd.bg};color:${bd.fg};font-family:'DM Sans',sans-serif;font-size:${fsr}pt;font-weight:700;text-align:center;padding:${rS*0.06}mm 0;transform:rotate(45deg);transform-origin:center;white-space:nowrap;">${bd.l}</div></div>`;}}
+
     const g=`${F.gap}mm`;
     let innerHtml='';
     if(p.e) innerHtml+=`<div style="font-size:${F.emoji}pt;line-height:1;margin-bottom:${g};">${esc(p.e)}</div>`;
     innerHtml+=`<div style="font-family:'Playfair Display',serif;font-size:${F.nom}pt;color:${colors.nom};line-height:1.05;font-weight:700;">${esc(p.n)}</div>`;
-    if(p.s) innerHtml+=`<div style="font-family:'Cormorant Garamond',serif;font-size:${F.sous}pt;font-style:italic;color:#8B5E3C;line-height:1.1;">${esc(p.s)}</div>`;
-    innerHtml+=`<div style="width:35%;height:.4pt;background:${cc.top};flex-shrink:0;margin:${g} 0;"></div>`;
-    innerHtml+=`<div style="font-family:'Playfair Display',serif;font-size:${F.prix}pt;color:${colors.prix};font-weight:700;line-height:1;">${esc(p.p)} €</div>`;
-    if(p.u) innerHtml+=`<div style="font-family:'Cormorant Garamond',serif;font-size:${F.unite}pt;font-style:italic;color:#8B5E3C;">${esc(p.u)}</div>`;
-    if(poidsStr) innerHtml+=`<div style="font-family:'DM Sans',sans-serif;font-size:${F.poids}pt;color:#666;margin-top:${g};">${esc(poidsStr)}</div>`;
+    if(p.s) innerHtml+=`<div style="font-family:'Cormorant Garamond',serif;font-size:${F.sous}pt;font-style:italic;color:${cc.top};line-height:1.1;">${esc(p.s)}</div>`;
+    innerHtml+=`<div style="width:35%;height:.5pt;background:${cc.top};flex-shrink:0;margin:${g} 0;"></div>`;
+    // Prix dans la couleur foncée de la catégorie — fort contraste
+    innerHtml+=`<div style="font-family:'Playfair Display',serif;font-size:${F.prix}pt;color:${cc.top};font-weight:700;line-height:1;">${esc(p.p)} €</div>`;
+    if(p.u) innerHtml+=`<div style="font-family:'Cormorant Garamond',serif;font-size:${F.unite}pt;font-style:italic;color:${cc.top};">${esc(p.u)}</div>`;
+    if(poidsStr) innerHtml+=`<div style="font-family:'DM Sans',sans-serif;font-size:${F.poids}pt;color:#555;margin-top:${g};">${esc(poidsStr)}</div>`;
     if(p.show_alg&&algNames) innerHtml+=`<div style="font-family:'DM Sans',sans-serif;font-size:${F.alg}pt;color:#c0392b;font-weight:600;line-height:1.2;margin-top:${g};padding:0 1mm;">⚠ ${esc(algNames)}</div>`;
+
     const wrap=document.createElement('div');
     wrap.className='etiq-wrap';
     wrap.style.cssText=`position:relative;width:${w}mm;height:${h}mm;margin:1.5mm;flex-shrink:0;overflow:hidden;`;
-    wrap.innerHTML=`${ribbonHtml}<div style="width:${w}mm;height:${h}mm;border:1pt solid ${cc.top};background:${colors.bg};display:flex;flex-direction:column;overflow:hidden;">
+    wrap.innerHTML=`${ribbonHtml}
+    <div style="width:${w}mm;height:${h}mm;border:1.5pt solid ${cc.top};background:${colors.bg};display:flex;flex-direction:column;overflow:hidden;">
       <div style="background:linear-gradient(90deg,${cc.top},${cc.bot});width:100%;height:${F.topH}mm;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:.8mm;">${topContent}</div>
-      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5mm 2mm;text-align:center;overflow:hidden;">${innerHtml}</div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.2mm 2mm;text-align:center;overflow:hidden;height:0;">${innerHtml}</div>
       <div style="background:${cc.bot};width:100%;height:${F.botH}mm;flex-shrink:0;"></div>
     </div>`;
     pg.appendChild(wrap);
   });
 }
+
 document.getElementById('sni').value=sn;
 document.getElementById('snd').textContent=sn;
 applyColorInputs();updateLogoDisplay();
