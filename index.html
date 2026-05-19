@@ -1,15 +1,15 @@
 <!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>Étiquettes Prix</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"><style>
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{–brun:#3D2010;–ocre:#C4883A;–chaud:#8B5E3C;–beige:#D4B896;–creme:#FAF6EE;–bg:#F5EFE6;–border:#DDD0BE;–red:#c0392b}
-body{font-family:‘DM Sans’,sans-serif;background:var(–bg);color:var(–brun);min-height:100vh;overflow-x:hidden}
-.app-header{background:var(–brun);color:var(–creme);padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.app-header h1{font-family:‘Playfair Display’,serif;font-size:17px;font-weight:700}
-.app-header p{font-size:10px;color:var(–beige);margin-top:1px}
-.header-print{background:var(–ocre);border:none;color:#fff;padding:8px 14px;border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:13px;font-weight:600;cursor:pointer}
-.tab-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(–border);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom)}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;cursor:pointer;border:none;background:none;font-family:‘DM Sans’,sans-serif;color:#aaa;font-size:10px;font-weight:500;gap:3px}
-.tab.active{color:var(–ocre)}
+:root{--brun:#3D2010;--ocre:#C4883A;--chaud:#8B5E3C;--beige:#D4B896;--creme:#FAF6EE;--bg:#F5EFE6;--border:#DDD0BE;--red:#c0392b}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--brun);min-height:100vh;overflow-x:hidden}
+.app-header{background:var(--brun);color:var(--creme);padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.app-header h1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.app-header p{font-size:10px;color:var(--beige);margin-top:1px}
+.header-print{background:var(--ocre);border:none;color:#fff;padding:8px 14px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);display:flex;z-index:200;padding-bottom:env(safe-area-inset-bottom)}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;color:#aaa;font-size:10px;font-weight:500;gap:3px}
+.tab.active{color:var(--ocre)}
 .tab-icon{font-size:20px;line-height:1}
 .screen{display:none;padding:16px 14px calc(80px + env(safe-area-inset-bottom)) 14px}
 .screen.active{display:block}
@@ -20,75 +20,95 @@ body{font-family:‘DM Sans’,sans-serif;background:var(–bg);color:var(–bru
 .prod-title{flex:1;min-width:0}
 .prod-title h3{color:#fff;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prod-title p{color:rgba(255,255,255,.75);font-size:11px;margin-top:1px}
-.prod-prix-badge{background:rgba(255,255,255,.2);color:#fff;font-family:‘Playfair Display’,serif;font-size:15px;font-weight:700;padding:5px 10px;border-radius:8px;white-space:nowrap}
-.prod-actions{display:flex;gap:6px;padding:10px 14px;background:#faf7f3;border-top:1px solid #f0ebe3}
-.prod-btn{flex:1;border:none;padding:9px;border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:600;cursor:pointer}
-.prod-btn-edit{background:var(–brun);color:#fff}
-.prod-btn-dup{background:#f0ebe3;color:var(–brun)}
-.prod-btn-del{background:#fde8e8;color:var(–red)}
+.prod-prix-badge{background:rgba(255,255,255,.2);color:#fff;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;padding:5px 10px;border-radius:8px;white-space:nowrap}
+.prod-actions{display:flex;gap:6px;padding:10px 14px;background:#faf7f3;border-top:1px solid #f0ebe3;align-items:center}
+.prod-btn{flex:1;border:none;padding:9px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.prod-btn-edit{background:var(--brun);color:#fff}
+.prod-btn-dup{background:#f0ebe3;color:var(--brun)}
+.prod-btn-del{background:#fde8e8;color:var(--red)}
+
+/* ===== TOGGLE IMPRESSION ===== */
+.print-toggle{display:flex;align-items:center;gap:6px;padding:0 2px;flex-shrink:0}
+.print-toggle-label{font-size:10px;font-weight:600;color:#aaa;white-space:nowrap}
+.switch{position:relative;width:40px;height:22px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.switch-slider{position:absolute;cursor:pointer;inset:0;background:#ddd;border-radius:22px;transition:.25s}
+.switch-slider:before{position:absolute;content:"";height:16px;width:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.25s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch input:checked + .switch-slider{background:var(--ocre)}
+.switch input:checked + .switch-slider:before{transform:translateX(18px)}
+.prod-card.printing .prod-card-header{opacity:1}
+.prod-card.not-printing{opacity:0.55}
+/* ============================= */
+
 .cat-section{margin-bottom:16px}
-.cat-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(–chaud);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.cat-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--chaud);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
 .cat-count{color:#fff;font-size:10px;padding:1px 7px;border-radius:10px}
-.fab{position:fixed;bottom:calc(72px + env(safe-area-inset-bottom));right:16px;width:54px;height:54px;background:var(–ocre);border-radius:50%;border:none;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(196,136,58,.5);display:flex;align-items:center;justify-content:center;z-index:150}
+.fab{position:fixed;bottom:calc(72px + env(safe-area-inset-bottom));right:16px;width:54px;height:54px;background:var(--ocre);border-radius:50%;border:none;color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(196,136,58,.5);display:flex;align-items:center;justify-content:center;z-index:150}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;display:none;align-items:flex-end}
 .modal-overlay.open{display:flex}
 .modal{background:#fff;border-radius:20px 20px 0 0;width:100%;max-height:92vh;overflow-y:auto}
 .modal-handle{width:40px;height:4px;background:#ddd;border-radius:2px;margin:10px auto 0}
-.modal-header{padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(–border);position:sticky;top:0;background:#fff;z-index:10}
-.modal-header h2{font-family:‘Playfair Display’,serif;font-size:16px;color:var(–brun)}
+.modal-header{padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:10}
+.modal-header h2{font-family:'Playfair Display',serif;font-size:16px;color:var(--brun)}
 .modal-close{background:none;border:none;font-size:22px;color:#aaa;cursor:pointer;padding:4px 8px}
 .modal-body{padding:14px 16px}
-.modal-footer{padding:12px 16px;border-top:1px solid var(–border);display:flex;gap:8px;position:sticky;bottom:0;background:#fff}
-.modal-save{flex:1;background:var(–ocre);color:#fff;border:none;padding:13px;border-radius:10px;font-family:‘DM Sans’,sans-serif;font-size:15px;font-weight:600;cursor:pointer}
-.modal-cancel{background:#f0ebe3;color:var(–brun);border:none;padding:13px 18px;border-radius:10px;font-family:‘DM Sans’,sans-serif;font-size:15px;font-weight:600;cursor:pointer}
+.modal-footer{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;position:sticky;bottom:0;background:#fff}
+.modal-save{flex:1;background:var(--ocre);color:#fff;border:none;padding:13px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer}
+.modal-cancel{background:#f0ebe3;color:var(--brun);border:none;padding:13px 18px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer}
 .field{margin-bottom:14px}
-.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(–chaud);margin-bottom:5px}
-.field input[type=text],.field select{width:100%;border:1.5px solid var(–border);border-radius:10px;padding:11px 13px;font-family:‘DM Sans’,sans-serif;font-size:15px;color:var(–brun);background:#fff;outline:none;-webkit-appearance:none}
-.field input[type=text]:focus,.field select:focus{border-color:var(–ocre)}
-.field input[type=text].auto{background:#f5ede0;color:var(–chaud);font-weight:600}
-.field input[type=color]{width:100%;height:44px;border:1.5px solid var(–border);border-radius:10px;cursor:pointer;padding:4px}
+.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--chaud);margin-bottom:5px}
+.field input[type=text],.field select{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--brun);background:#fff;outline:none;-webkit-appearance:none}
+.field input[type=text]:focus,.field select:focus{border-color:var(--ocre)}
+.field input[type=text].auto{background:#f5ede0;color:var(--chaud);font-weight:600}
+.field input[type=color]{width:100%;height:44px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;padding:4px}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#f9f6f2;border-radius:10px;margin-bottom:10px}
-.toggle-row label{font-size:14px;color:var(–brun);font-weight:500}
-.toggle-row input[type=checkbox]{width:42px;height:24px;accent-color:var(–ocre);cursor:pointer}
+.toggle-row label{font-size:14px;color:var(--brun);font-weight:500}
+.toggle-row input[type=checkbox]{width:42px;height:24px;accent-color:var(--ocre);cursor:pointer}
 .alg-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .alg-item{display:flex;align-items:center;gap:7px;background:#f9f6f2;border-radius:8px;padding:8px 10px;cursor:pointer}
-.alg-item input{accent-color:var(–red);width:16px;height:16px;flex-shrink:0}
-.alg-item span{font-size:12px;color:var(–brun)}
+.alg-item input{accent-color:var(--red);width:16px;height:16px;flex-shrink:0}
+.alg-item span{font-size:12px;color:var(--brun)}
 .badge-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
-.badge-opt{border:none;border-radius:8px;padding:9px;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:600;cursor:pointer;opacity:.65}
-.badge-opt.active{opacity:1;box-shadow:0 0 0 2.5px var(–brun)}
-.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(–ocre);margin:18px 0 10px;padding-top:14px;border-top:1px dashed var(–border)}
+.badge-opt{border:none;border-radius:8px;padding:9px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;opacity:.65}
+.badge-opt.active{opacity:1;box-shadow:0 0 0 2.5px var(--brun)}
+.section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ocre);margin:18px 0 10px;padding-top:14px;border-top:1px dashed var(--border)}
 .style-card{background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);padding:16px;margin-bottom:12px}
-.style-card h3{font-size:13px;font-weight:700;color:var(–brun);margin-bottom:12px}
+.style-card h3{font-size:13px;font-weight:700;color:var(--brun);margin-bottom:12px}
 .color-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.color-item label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(–chaud);display:block;margin-bottom:4px}
-.logo-zone{border:2px dashed var(–beige);border-radius:12px;padding:16px;text-align:center;cursor:pointer;background:var(–creme)}
-.logo-zone p{font-size:13px;color:var(–chaud)}
+.color-item label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--chaud);display:block;margin-bottom:4px}
+.logo-zone{border:2px dashed var(--beige);border-radius:12px;padding:16px;text-align:center;cursor:pointer;background:var(--creme)}
+.logo-zone p{font-size:13px;color:var(--chaud)}
 .logo-preview{display:flex;flex-direction:column;align-items:center;gap:8px}
-.btn-rm-logo{background:none;border:1px solid var(–border);border-radius:8px;padding:5px 12px;font-size:12px;color:var(–red);cursor:pointer;font-family:‘DM Sans’,sans-serif}
+.btn-rm-logo{background:none;border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:12px;color:var(--red);cursor:pointer;font-family:'DM Sans',sans-serif}
 .cat-pal-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f5f0ea}
 .cat-pal-row:last-child{border-bottom:none}
 .cat-pal-swatch{width:36px;height:36px;border-radius:8px;flex-shrink:0}
-.cat-pal-name{font-size:13px;color:var(–brun);font-weight:600}
+.cat-pal-name{font-size:13px;color:var(--brun);font-weight:600}
 .cat-pal-code{font-size:11px;color:#aaa;font-family:monospace;margin-top:1px}
 .info-box{background:#f0f7ff;border:1px solid #c8dff7;border-radius:10px;padding:10px 14px;font-size:12px;color:#2c5282;line-height:1.6;margin-bottom:12px}
 .preview-toolbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.pv-btn{border:1px solid var(–border);background:#fff;border-radius:8px;padding:8px 12px;font-size:12px;font-family:‘DM Sans’,sans-serif;color:var(–brun);cursor:pointer;font-weight:500}
-.pv-btn.on{background:var(–brun);color:#fff;border-color:var(–brun)}
+.pv-btn{border:1px solid var(--border);background:#fff;border-radius:8px;padding:8px 12px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--brun);cursor:pointer;font-weight:500}
+.pv-btn.on{background:var(--brun);color:#fff;border-color:var(--brun)}
 .page-wrap{overflow-x:auto;padding-bottom:8px}
 .page-a4{background:#fff;width:210mm;box-shadow:0 4px 20px rgba(0,0,0,.2);padding:10mm;display:flex;flex-wrap:wrap;align-content:start}
 .pa.cut-lines .etiq-wrap{outline:.3pt dashed #bbb}
 .io-card{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;gap:10px}
-.io-btn{flex:1;border:none;padding:12px;border-radius:10px;font-family:‘DM Sans’,sans-serif;font-size:13px;font-weight:600;cursor:pointer}
-.io-btn-exp{background:var(–brun);color:#fff}
-.io-btn-imp{background:#f0ebe3;color:var(–brun)}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(–brun);color:var(–creme);padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;transition:all .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2);border-left:3px solid var(–ocre)}
+.io-btn{flex:1;border:none;padding:12px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.io-btn-exp{background:var(--brun);color:#fff}
+.io-btn-imp{background:#f0ebe3;color:var(--brun)}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--brun);color:var(--creme);padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;transition:all .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2);border-left:3px solid var(--ocre)}
+
+/* Bandeau résumé sélection */
+.selection-bar{background:var(--brun);color:var(--creme);padding:8px 14px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;border-radius:10px}
+.selection-bar span{opacity:.8;font-weight:400}
+.sel-all-btn{background:var(--ocre);color:#fff;border:none;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+
 @media(min-width:768px){
 body{max-width:1200px;margin:0 auto}
 .app-header{position:relative}
-.tab-bar{position:relative;border-radius:12px;margin:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid var(–border)}
+.tab-bar{position:relative;border-radius:12px;margin:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid var(--border)}
 .screen{padding:16px 20px 20px}
 .fab{bottom:20px;right:20px}
 .modal{max-width:480px;margin:auto;border-radius:20px}
@@ -108,7 +128,7 @@ body,html{background:none}
 
 <div class="app-header">
   <div><h1>🏷️ Étiquettes Prix</h1><p id="snd">Les Petits Pains de Giulia</p></div>
-  <button class="header-print" onclick="window.print()">🖨️ Imprimer</button>
+  <button class="header-print" onclick="printFromHeader()">🖨️ Imprimer</button>
 </div>
 <div class="tab-bar">
   <button class="tab active" onclick="showTab('produits')" id="tab-produits"><span class="tab-icon">🛍️</span><span>Produits</span></button>
@@ -182,7 +202,6 @@ const CAT_COLORS={
   'Boissons':     {top:'#4A2C2A',bot:'#6B3F3C',label:'☕ Boissons',      desc:'Brun café'},
   'Autres':       {top:'#4A4A4A',bot:'#666666',label:'🏷️ Autres',       desc:'Ardoise'},
 };
-// Clé avec accent pour la catégorie Pâtisseries
 CAT_COLORS['Pâtisseries'] = CAT_COLORS['Patisseries'];
 
 const CATS=['Pains','Viennoiseries','Pâtisseries','Snacking','Boissons','Autres'];
@@ -215,7 +234,6 @@ let editingId=null;
 
 function catColor(cat){return CAT_COLORS[cat]||CAT_COLORS['Autres']}
 
-// Tailles proportionnelles à la hauteur disponible
 function calcFS(h, itemCount){
   const topH=h*0.16, botH=h*0.04, inner=h-topH-botH, pt=2.83;
   const many = itemCount >= 6;
@@ -253,6 +271,40 @@ function delP(id){if(!confirm('Supprimer ?'))return;ps=ps.filter(p=>p.id!==id);s
 function exportData(){const b=new Blob([JSON.stringify({sn,colors,ps},null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='etiquettes.json';a.click();URL.revokeObjectURL(u);toast('✅ Exporté!')}
 function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.ps&&Array.isArray(d.ps)){ps=d.ps;nid=Math.max(...ps.map(p=>p.id),0)+1;if(d.sn){sn=d.sn;document.getElementById('sni').value=sn;document.getElementById('snd').textContent=sn}if(d.colors){colors=d.colors;applyColorInputs()}sv();renderProdList();toast('✅ '+ps.length+' produits!')}}catch{toast('❌ Erreur')}};r.readAsText(f);e.target.value=''}
 
+// ===== TOGGLE IMPRESSION DIRECT =====
+function togglePrint(id){
+  const p=ps.find(x=>x.id===id);
+  if(!p)return;
+  p.v=!p.v;
+  sv();
+  // Mettre à jour visuellement la carte sans re-render complet
+  const card=document.querySelector(`.prod-card[data-id="${id}"]`);
+  if(card){
+    card.classList.toggle('not-printing',!p.v);
+    card.classList.toggle('printing',p.v);
+  }
+  updateSelectionBar();
+}
+
+function toggleAllPrint(val){
+  ps.forEach(p=>p.v=val);
+  sv();
+  renderProdList();
+  toast(val ? '✅ Tous sélectionnés' : 'Tous désélectionnés');
+}
+
+function updateSelectionBar(){
+  const nb=ps.filter(p=>p.v).length;
+  const el=document.getElementById('sel-bar-count');
+  if(el) el.textContent=`${nb} / ${ps.length} sélectionné${nb>1?'s':''}`;
+}
+
+function printFromHeader(){
+  showTab('apercu');
+  setTimeout(()=>window.print(), 300);
+}
+// =====================================
+
 function openModal(id){
   editingId=id||null;
   const p=id?ps.find(x=>x.id===id):{n:'',s:'',p:'',u:'la pièce',e:'',sz:'sm',cat:'Pâtisseries',badge:'',v:true,alg:[],show_alg:false,poids:'',poids_u:'g',show_poids:false};
@@ -289,8 +341,6 @@ function openModal(id){
     <div class="section-title">⚠️ Allergènes <span style="font-weight:400;color:#aaa;font-size:10px">(M et plus)</span></div>
     <div class="alg-grid">${algGrid}</div>
     <div class="toggle-row" style="margin-top:10px"><label>Afficher les allergènes</label><input type="checkbox" id="m_show_alg" ${p.show_alg?'checked':''}></div>
-    <div class="section-title">👁 Visibilité</div>
-    <div class="toggle-row"><label>Afficher sur la page imprimée</label><input type="checkbox" id="m_v" ${p.v?'checked':''}></div>
   `;
   updateCatPreview(p.cat);
   document.getElementById('modal-overlay').classList.add('open');
@@ -299,13 +349,22 @@ function openModal(id){
 function updateCatPreview(cat){const c=catColor(cat);const el=document.getElementById('cat-prev');if(el){el.style.background=`linear-gradient(90deg,${c.top},${c.bot})`;el.textContent=c.label}}
 function selectBadge(btn){document.querySelectorAll('.badge-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
 function updateModalKg(){const pr=parseFloat(String((document.getElementById('m_p')||{}).value||'').replace(',','.'));const po=parseFloat(String((document.getElementById('m_poids')||{}).value||'').replace(',','.'));const u=(document.getElementById('m_poids_u')||{}).value||'g';const el=document.getElementById('m_pkg');if(!el)return;if(!pr||!po||isNaN(pr)||isNaN(po)){el.value='—';return;}el.value=(pr/(u==='g'?po/1000:po)).toFixed(2).replace('.',',')+' €/kg'}
-function saveModal(){const n=(document.getElementById('m_n').value||'').trim();if(!n){alert('Le nom est obligatoire');return;}const alg=Array.from(document.querySelectorAll('input[name=alg]:checked')).map(x=>x.value);const ab=document.querySelector('.badge-opt.active');const badge=ab?ab.dataset.badge||'':'';const data={n,s:document.getElementById('m_s').value,p:document.getElementById('m_p').value,u:document.getElementById('m_u').value,e:document.getElementById('m_e').value,sz:document.getElementById('m_sz').value,cat:document.getElementById('m_cat').value,badge,v:document.getElementById('m_v').checked,poids:document.getElementById('m_poids').value,poids_u:document.getElementById('m_poids_u').value,show_poids:document.getElementById('m_show_poids').checked,alg,show_alg:document.getElementById('m_show_alg').checked};if(editingId){const p=ps.find(p=>p.id===editingId);if(p)Object.assign(p,data);}else{ps.push({id:nid++,...data});}sv();closeModal();renderProdList();toast(editingId?'✅ Modifié !':'✅ Ajouté !')}
+function saveModal(){const n=(document.getElementById('m_n').value||'').trim();if(!n){alert('Le nom est obligatoire');return;}const alg=Array.from(document.querySelectorAll('input[name=alg]:checked')).map(x=>x.value);const ab=document.querySelector('.badge-opt.active');const badge=ab?ab.dataset.badge||'':'';const data={n,s:document.getElementById('m_s').value,p:document.getElementById('m_p').value,u:document.getElementById('m_u').value,e:document.getElementById('m_e').value,sz:document.getElementById('m_sz').value,cat:document.getElementById('m_cat').value,badge,poids:document.getElementById('m_poids').value,poids_u:document.getElementById('m_poids_u').value,show_poids:document.getElementById('m_show_poids').checked,alg,show_alg:document.getElementById('m_show_alg').checked};if(editingId){const p=ps.find(p=>p.id===editingId);if(p)Object.assign(p,data);}else{ps.push({id:nid++,v:true,...data});}sv();closeModal();renderProdList();toast(editingId?'✅ Modifié !':'✅ Ajouté !')}
 function closeModal(){document.getElementById('modal-overlay').classList.remove('open');editingId=null}
 function handleOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal()}
 
 function renderProdList(){
   const c=document.getElementById('prod-list-container');c.innerHTML='';
   if(!ps.length){c.innerHTML='<p style="text-align:center;color:#aaa;padding:40px 20px;font-size:15px">Aucun produit.<br>Appuie sur + pour en ajouter !</p>';return;}
+
+  // Bandeau sélection
+  const nb=ps.filter(p=>p.v).length;
+  const allOn=nb===ps.length;
+  const bar=document.createElement('div');
+  bar.className='selection-bar';
+  bar.innerHTML=`<div>🖨️ Impression &nbsp;<span id="sel-bar-count">${nb} / ${ps.length} sélectionné${nb>1?'s':''}</span></div><button class="sel-all-btn" onclick="toggleAllPrint(${!allOn})">${allOn?'Tout désélectionner':'Tout sélectionner'}</button>`;
+  c.appendChild(bar);
+
   const seen=[],groups={};
   ps.forEach(p=>{const k=p.cat||'Autres';if(!groups[k]){groups[k]=[];seen.push(k)}groups[k].push(p)});
   seen.forEach(cat=>{
@@ -316,10 +375,29 @@ function renderProdList(){
     sec.appendChild(t);
     const l=document.createElement('div');l.className='prod-list';
     groups[cat].forEach(p=>{
-      const card=document.createElement('div');card.className='prod-card';
+      const card=document.createElement('div');
+      card.className='prod-card'+(p.v?' printing':' not-printing');
+      card.dataset.id=p.id;
       const bd=BADGES.find(b=>b.k===p.badge);
       const bh=p.badge&&bd?`<span style="background:${bd.bg};color:${bd.fg};font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;margin-left:6px">${bd.l}</span>`:'';
-      card.innerHTML=`<div class="prod-card-header" style="background:linear-gradient(135deg,${cc.top},${cc.bot})"><div class="prod-emoji">${p.e||'🏷️'}</div><div class="prod-title"><h3>${esc(p.n)}${bh}</h3><p>${esc(p.s)||'—'} · ${SIZES[p.sz]?SIZES[p.sz].label:''}</p></div><div class="prod-prix-badge">${esc(p.p)} €</div></div><div class="prod-actions"><button class="prod-btn prod-btn-edit" onclick="openModal(${p.id})">✏️ Modifier</button><button class="prod-btn prod-btn-dup" onclick="dupP(${p.id})">⧉</button><button class="prod-btn prod-btn-del" onclick="delP(${p.id})">🗑️</button></div>`;
+      card.innerHTML=`
+        <div class="prod-card-header" style="background:linear-gradient(135deg,${cc.top},${cc.bot})">
+          <div class="prod-emoji">${p.e||'🏷️'}</div>
+          <div class="prod-title"><h3>${esc(p.n)}${bh}</h3><p>${esc(p.s)||'—'} · ${SIZES[p.sz]?SIZES[p.sz].label:''}</p></div>
+          <div class="prod-prix-badge">${esc(p.p)} €</div>
+        </div>
+        <div class="prod-actions">
+          <button class="prod-btn prod-btn-edit" onclick="openModal(${p.id})">✏️ Modifier</button>
+          <button class="prod-btn prod-btn-dup" onclick="dupP(${p.id})">⧉</button>
+          <button class="prod-btn prod-btn-del" onclick="delP(${p.id})">🗑️</button>
+          <div class="print-toggle">
+            <span class="print-toggle-label">🖨️</span>
+            <label class="switch">
+              <input type="checkbox" ${p.v?'checked':''} onchange="togglePrint(${p.id})">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+        </div>`;
       l.appendChild(card);
     });
     sec.appendChild(l);c.appendChild(sec);
@@ -329,21 +407,24 @@ function renderProdList(){
 function rp(){
   const pg=document.getElementById('pa');pg.innerHTML='';
   pg.classList.toggle('cut-lines',cutLines);
-  ps.filter(p=>p.v).forEach(p=>{
+  const selected=ps.filter(p=>p.v);
+  if(!selected.length){
+    pg.innerHTML='<p style="padding:20mm;color:#aaa;font-size:14pt;text-align:center;">Aucun produit sélectionné.<br>Active le toggle 🖨️ sur les produits souhaités.</p>';
+    return;
+  }
+  selected.forEach(p=>{
     const sz=SIZES[p.sz]||SIZES['sm'];
     const w=sz.w, h=sz.h;
     const cc=catColor(p.cat);
-    const bigFormat = h >= 50; // M, L, XL, XXL
+    const bigFormat = h >= 50;
 
-    // Ce qu'on affiche selon la taille
     const showEmoji = true;
     const showSous  = bigFormat && !!p.s;
     const showUnite = !!p.u;
     const showPoids = bigFormat && p.show_poids && !!p.poids;
     const showAlg   = bigFormat && p.show_alg && p.alg && p.alg.length > 0;
 
-    // Compter les éléments pour ajuster les tailles
-    let ni = 2; // nom + prix toujours
+    let ni = 2;
     if(showEmoji && p.e) ni++;
     if(showSous) ni++;
     if(showUnite && p.u) ni++;
@@ -357,14 +438,12 @@ function rp(){
     const poidsStr = showPoids ? `${p.poids} ${p.poids_u}${pkgVal?' · '+pkgVal+' €/kg':''}` : null;
     const bd = p.badge ? BADGES.find(b=>b.k===p.badge) : null;
 
-    // BANDEAU HAUT
     let shopContent = logoB64
       ? `<img src="${logoB64}" style="max-height:${F.topH*0.72}mm;max-width:${w*0.82}mm;object-fit:contain;" alt="logo">`
       : `<span style="font-family:'DM Sans',sans-serif;font-size:${F.shop}pt;font-weight:700;letter-spacing:.10em;color:#fff;text-transform:uppercase;white-space:nowrap;overflow:hidden;">${esc(sn)}</span>`;
 
     let topHtml;
     if(bd && !bigFormat){
-      // Petit format : badge DANS le bandeau, bien lisible
       const badgePt = Math.max(5, h*0.105);
       topHtml = `<div style="background:linear-gradient(90deg,${cc_top},${cc.bot});width:100%;height:${F.topH}mm;display:flex;align-items:center;justify-content:center;gap:2mm;flex-shrink:0;padding:.5mm 1mm;">
         <span style="background:${bd.bg};color:${bd.fg};font-family:'DM Sans',sans-serif;font-size:${badgePt}pt;font-weight:700;padding:.4mm 1.5mm;border-radius:1mm;white-space:nowrap;flex-shrink:0;">${bd.l}</span>
@@ -376,7 +455,6 @@ function rp(){
       </div>`;
     }
 
-    // RUBAN (grands formats uniquement)
     let ribbonHtml = '';
     if(bd && bigFormat){
       const rS = Math.max(18, w*0.44);
@@ -387,7 +465,6 @@ function rp(){
       </div>`;
     }
 
-    // CONTENU
     const g = F.gap + 'mm';
     let inner = '';
     if(showEmoji && p.e) inner += `<div style="font-size:${F.emoji}pt;line-height:1;margin-bottom:${g};">${esc(p.e)}</div>`;
